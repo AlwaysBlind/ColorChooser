@@ -1,23 +1,33 @@
-import logo from './logo.svg';
+import { useState } from 'react';
+import { Button } from 'react-bootstrap';
 import './App.css';
+import ClimbingList from './Components/ClimbingList';
+import ClimbingPlusColorWindow from './Components/ClimbingWindowPlusColorWindow';
+// Todo: Lay a plan of what should be needed
 
 function App() {
+  const [climbingWalls, setClimbingWalls] = useState([new Set()]);
+
+  const AddWall = () => {
+    const newWalls = [...climbingWalls, new Set()]
+    setClimbingWalls(newWalls)
+  }
+  const DeleteWall = () => {
+    const newWalls = [...climbingWalls]
+    newWalls.pop()
+    setClimbingWalls(newWalls)
+  }
+
   return (
+
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div>
+        <Button onClick={AddWall} disabled={climbingWalls.length > 4}> + </Button>
+        <Button onClick={DeleteWall} disabled={climbingWalls.length <= 0}> - </Button>
+      </div>
+      <div className="d-flex justify-content-center mt-5">
+        <ClimbingList climbingWalls={climbingWalls} setClimbingWalls={setClimbingWalls} />
+      </div>
     </div>
   );
 }
