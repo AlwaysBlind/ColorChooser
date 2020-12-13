@@ -1,32 +1,30 @@
 import { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import './App.css';
-import ClimbingList from './Components/ClimbingList';
-import ClimbingPlusColorWindow from './Components/ClimbingWindowPlusColorWindow';
-// Todo: Lay a plan of what should be needed
+import ClimbingWallList from './Components/ClimbingWallList';
 
 function App() {
-  const [climbingWalls, setClimbingWalls] = useState([new Set()]);
+  const [climbingWallColors, setClimbingWallColors] = useState([new Set()]);
 
   const AddWall = () => {
-    const newWalls = [...climbingWalls, new Set()]
-    setClimbingWalls(newWalls)
+    const newWalls = [...climbingWallColors, new Set()]
+    setClimbingWallColors(newWalls)
   }
   const DeleteWall = () => {
-    const newWalls = [...climbingWalls]
+    const newWalls = [...climbingWallColors]
     newWalls.pop()
-    setClimbingWalls(newWalls)
+    setClimbingWallColors(newWalls)
   }
 
   return (
 
     <div className="App">
       <div>
-        <Button onClick={AddWall} disabled={climbingWalls.length > 4}> + </Button>
-        <Button onClick={DeleteWall} disabled={climbingWalls.length <= 0}> - </Button>
+        <Button onClick={AddWall} disabled={climbingWallColors.length > 4}> + </Button>
+        <Button onClick={DeleteWall} disabled={climbingWallColors.length <= 0}> - </Button>
       </div>
       <div className="d-flex justify-content-center mt-5">
-        <ClimbingList climbingWalls={climbingWalls} setClimbingWalls={setClimbingWalls} />
+        <ClimbingWallList climbingWallColors={climbingWallColors} setClimbingWallColors={setClimbingWallColors} />
       </div>
     </div>
   );

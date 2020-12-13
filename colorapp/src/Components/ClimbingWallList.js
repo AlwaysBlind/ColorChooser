@@ -1,16 +1,15 @@
-import { useState } from "react";
 import { ListGroup } from "react-bootstrap";
-import ClimbingPlusColorWindow from "./ClimbingWindowPlusColorWindow";
-const ClimbingList = ({ climbingWalls, setClimbingWalls }) => {
+import ClimbingWall from "./ClimbingWall";
+const ClimbingWallList = ({ climbingWallColors, setClimbingWallColors }) => {
     const GetAddColorToWindowIFunction = (i) => {
         return function AddColorToChosenBox(color) {
             return AddColor(i, color)
         }
     }
     const AddColor = (i, color) => {
-        const newClimbingWalls = [...climbingWalls]
+        const newClimbingWalls = [...climbingWallColors]
         newClimbingWalls[i].add(color)
-        setClimbingWalls(newClimbingWalls)
+        setClimbingWallColors(newClimbingWalls)
     }
 
     const GetDeleteColorInWindowIFunction = (i) => {
@@ -19,18 +18,18 @@ const ClimbingList = ({ climbingWalls, setClimbingWalls }) => {
         }
     }
     const RemoveColor = (i, color) => {
-        const newClimbingWalls = [...climbingWalls]
+        const newClimbingWalls = [...climbingWallColors]
         newClimbingWalls[i].delete(color)
-        setClimbingWalls(newClimbingWalls)
+        setClimbingWallColors(newClimbingWalls)
     }
 
-    const climbingList = climbingWalls.map((chosenColors, index) => {
+    const climbingWalls = climbingWallColors.map((chosenColors, index) => {
         const from = Math.max(0, index - 1)
         const to = index + 2
         const addColorFunc = GetAddColorToWindowIFunction(index)
         const deleteColorFunc = GetDeleteColorInWindowIFunction(index)
-        return <ClimbingPlusColorWindow
-            subArray={climbingWalls.slice(from, to)}
+        return <ClimbingWall
+            subArray={climbingWallColors.slice(from, to)}
             chosenColors={chosenColors}
             addColor={addColorFunc}
             deleteColor={deleteColorFunc}
@@ -39,9 +38,9 @@ const ClimbingList = ({ climbingWalls, setClimbingWalls }) => {
     })
     return (
         <ListGroup horizontal>
-            {climbingList}
+            {climbingWalls}
         </ListGroup>
     );
 }
 
-export default ClimbingList;
+export default ClimbingWallList;

@@ -1,4 +1,4 @@
-import { Card, Button, ButtonGroup } from "react-bootstrap";
+import { Button, ButtonGroup } from "react-bootstrap";
 
 const ClimbingWindow = ({ colors, deleteColor }) => {
     const colorMap = () => {
